@@ -6,7 +6,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import About from '../pages/About';
 import ProtectedRoute from './ProtectedRoute';
-import MainLayout from './mainLayout';
+import MainLayout from './MainLayout';
 
 const AppRoutes = () => {
   return (

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 const Home = () => {
   const now = new Date().getHours();
-  const { currentUser } = useContext(MyLoginStore);
+  const { currentUser, grandTotal, cartItem, categoryList } = useContext(MyLoginStore);
   const navigate = useNavigate()
 
   const greet = () => {
@@ -21,8 +21,9 @@ const Home = () => {
   };
   const showMessage = greet();
   return (
-    <div className="bg-[#0d0d0d] z-0 h-full">
+    <div className="bg-[#0d0d0d] z-0 h-full overflow-hidden">
     <div className="relative top-20 h-full text-white px-5 py-5 border-b mb-20">
+
       
       {/* Hero area */}
 
@@ -70,7 +71,7 @@ const Home = () => {
         <div className="flex gap-5 justify-self-start border w-full p-5 rounded-2xl">
           <Package className="text-[#c8f400] rounded-2xl p-2 bg-[#c8f400]/20" size={42}/>
           <div>
-            <span className="font-bold text-xl">0</span>
+            <span className="font-bold text-xl">{cartItem.length}</span>
             <h4 className="capitalize text-gray-300/70 text-sm">cart items</h4>
             <p className="text-gray-400/40 text-xs">in your bag</p>
           </div>
@@ -78,7 +79,7 @@ const Home = () => {
         <div className="flex gap-5 justify-self-start border w-full p-5 rounded-2xl">
           <TrendingUp className="text-[#5fa5fa] rounded-2xl p-2 bg-[#5fa5fa]/20" size={42}/>
           <div>
-            <span className="font-bold text-xl">₹ 0.00</span>
+            <span className="font-bold text-xl">${grandTotal}</span>
             <h4 className="capitalize text-gray-300/70 text-sm">cart value</h4>
             <p className="text-gray-400/40 text-xs">ready to checkout</p>
           </div>
@@ -94,7 +95,7 @@ const Home = () => {
         <div className="flex gap-5 justify-self-start border w-full p-5 rounded-2xl">
           <Tag className="text-[#c084fc] rounded-2xl p-2 bg-[#c084fc]/20" size={42}/>
           <div>
-            <span className="font-bold text-xl">6</span>
+            <span className="font-bold text-xl">{categoryList.length}</span>
             <h4 className="capitalize text-gray-300/70 text-sm">categories</h4>
             <p className="text-gray-400/40 text-xs">to explore</p>
           </div>

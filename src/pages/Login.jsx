@@ -4,6 +4,7 @@ import { Lock, Mail, Zap, LogIn, EyeOff, Eye } from "lucide-react";
 import { MyLoginStore } from "../context/AppStore";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Login = () => {
   } = useForm({ mode: "onChange" });
 
   const registeredUser = JSON.parse(localStorage.getItem("info") || "[]");
+  const cartInfo = JSON.parse(localStorage.getItem("cart") || "[]"); 
 
   const handleLogin = (data) => {
     const authenticateUser = registeredUser.find(
@@ -31,12 +33,13 @@ const Login = () => {
     );
 
     if (authenticateUser) {
-      alert("login Successfull..");
+      toast.success("login Successfull..");
       localStorage.setItem("activeUser", JSON.stringify(authenticateUser));
+      localStorage.setItem("cart", JSON.stringify(cartInfo));
       setCurrentUser(authenticateUser);
       navigate("/");
     } else {
-      alert("Email or Password is not matching");
+      toast.error("Email or Password is not matching");
       return;
     }
 
@@ -47,7 +50,7 @@ const Login = () => {
     setIsPasswordReset(true);
     setResetEmail("");
     setResetPassword("");
-      setResetConfimr("");
+    setResetConfimr("");
   };
 
   const handleFindUser = (e) => {
@@ -58,13 +61,13 @@ const Login = () => {
       if(verifyUser){
         setVerifiedUser(true);
       }else{
-        alert("User not found, please try again!!!");
+        toast.error("User not found, please try again!!!");
       }
       return;
     }
 
     if(resetPassword !== resetConfirm){
-      alert("Password do not match");
+      toast.error("Password do not match");
       return;
     }
 
@@ -75,7 +78,7 @@ const Login = () => {
 
       localStorage.setItem("info", JSON.stringify(registeredUser));
 
-      alert("Password Updated Successfully!");
+      toast.success("Password Updated Successfully!");
 
       setIsPasswordReset(false);
       setVerifiedUser(false);
@@ -211,10 +214,10 @@ const Login = () => {
 
       {/* Reset Password modal */}
       {isPasswordReset && (
-        <div className="z-1 absolute h-screen w-screen bg-gray/30 backdrop-blur-xs flex items-center-safe justify-center-safe">
+        <div className="z-1 absolute h-screen w-screen bg-gray-500/50 md:bg-gray/30 backdrop-blur-xs flex items-center-safe justify-center-safe">
           <form
             onSubmit={handleFindUser}
-            className="w-[30%] bg-white/50 p-10 rounded-2xl shadow-lg shadow-gray-600/30 text-[#134c84]"
+            className="md:w-[30%] bg-white/50 p-10 rounded-2xl shadow-lg shadow-gray-600/30 text-[#134c84]"
           >
             <div className="flex items-center-safe justify-between font-semibold text-2xl mb-6">
               <h1>Reset Password</h1>

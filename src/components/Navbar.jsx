@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 import { Zap, ShoppingCart, LogOut, Logs } from "lucide-react";
 import { NavLink, useNavigate } from "react-router";
 import { MyLoginStore } from "../context/AppStore";
+import Cart from "../pages/Cart";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const { currentUser, setCurrentUser,fetchApi } = useContext(MyLoginStore);
+  const { currentUser, setCurrentUser,fetchApi, setIsCartOpen, cartItem } = useContext(MyLoginStore);
   const [showMenu, setShowMenu] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
@@ -13,9 +15,11 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("activeUser");
     setCurrentUser(null);
+    toast.error("User Logout successfully!")
   };
   return (
     <div>
+      <Cart />
       <nav className="fixed top-0 z-1 w-full flex backdrop-blur-xl text-white items-center-safe justify-between p-5">
         <div onClick={()=>navigate("/")} className="flex cursor-pointer items-center-safe gap-2">
           <div className="bg-[#c8f400] p-2 rounded-xl">
@@ -59,8 +63,10 @@ const Navbar = () => {
               {currentUser?.UserName}
             </span>
           </div>
-          <span className="flex gap-2 cursor-pointer items-center-safe border border-gray-200/50 rounded-xl p-2 text-white">
-            <ShoppingCart size={18}/>
+          <span
+          className="relative flex gap-2 cursor-pointer items-center-safe border border-gray-200/50 rounded-xl p-2 text-white">
+            <ShoppingCart size={18} onClick={()=>setIsCartOpen(true)}/>
+              {cartItem.length > 0 ? <sup className="absolute right-0 top-0 px-1 py-1 bg-red-600 rounded-full text-xs/2 animate-pulse">{cartItem.length}</sup> : ""}
           </span>
           <span
             className="cursor-pointer active:scale-95 flex gap-2 items-center-safe border border-gray-200/50 rounded-xl p-2 text-white hover:bg-red-600/50 hover:border-red-500 transition-colors"
@@ -84,7 +90,12 @@ const Navbar = () => {
               {currentUser?.UserName}
             </span>
           </div>
-          <span className="flex gap-2 cursor-pointer items-center-safe border border-gray-200/50 rounded-xl p-2 text-white">
+          <span
+          onClick={()=>{
+              setIsCartOpen(true);
+              setShowProfile(false);
+            }}
+          className="flex gap-2 cursor-pointer items-center-safe border border-gray-200/50 rounded-xl p-2 text-white">
             <ShoppingCart size={18}/>
             Cart
           </span>

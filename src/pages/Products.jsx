@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { MyLoginStore } from "../context/AppStore";
-import ProductCard from "./ProductCard";
-import Footer from "./Footer";
+import ProductCard from "../components/ProductCard";
+import Footer from "../components/Footer";
 import { ChevronDown, Search, X } from "lucide-react";
+import { useNavigate } from "react-router";
+
 
 const Products = () => {
   const {
@@ -17,8 +19,10 @@ const Products = () => {
     setSelectedFeatured,
     isFeaturedOpen,
     setIsFeaturedOpen,
-    categoryList
+    categoryList,
   } = useContext(MyLoginStore);
+
+  const navigate = useNavigate();
 
   const handleInputClear = () => {
     setSearchInput("");
@@ -70,7 +74,7 @@ const Products = () => {
 
   return (
     <div className="bg-[#0a0a0a] min-h-screen text-white py-10">
-      <div className="border-b border-b-gray-800/50 py-16 px-5 md:px-10">
+      <div className="border-b border-b-gray-800/50 py-16 md:px-10">
         {/* Results Header */}
         <h1 className="text-5xl font-semibold">All Products</h1>
         <div className="flex items-baseline gap-1.5 mb-10">
@@ -257,7 +261,9 @@ const Products = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {displayedProducts.length > 0 ? (
             displayedProducts.map((item) => (
-              <div key={item.id}>
+              <div key={item.id} className="cursor-pointer" onClick={()=>{
+                navigate(`/products/${item.id}`)
+                }}>
                 <ProductCard product={item} />
               </div>
             ))

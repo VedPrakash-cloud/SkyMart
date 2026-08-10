@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { MyLoginStore } from "../context/AppStore";
 import { PackageOpen, ShoppingBag, X } from "lucide-react";
 import { useNavigate } from "react-router";
-import CartProduct from "./CartProduct";
+import CartProduct from "../components/CartProduct";
 
 const Cart = () => {
   const { isCartOpen, setIsCartOpen, cartItem, clearCart, grandTotal, handleCheckout } = useContext(MyLoginStore);
@@ -11,13 +11,13 @@ const Cart = () => {
 
   return (
     <div
-      className={`fixed top-0 right-0 z-50 h-screen w-[20%] md:w-full backdrop-blur-md transition-transform duration-600 ease-in-out ${
+      className={`fixed top-0 right-0 z-50 h-screen w-full backdrop-blur-md transition-transform duration-600 ease-in-out ${
         isCartOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      <div className="absolute top-0 right-0 min-w-80 h-screen bg-[#111111] border-l border-gray-800 text-white flex flex-col justify-between">
+      <div className="absolute top-0 right-0 w-full md:w-120 h-screen bg-[#111111] border-l border-gray-800 text-white flex flex-col justify-between">
         <div className="h-[75%]">
-          <div className="flex w-100 md:w-full justify-between items-center-safe p-5 border-b border-gray-800">
+          <div className="flex w-full justify-between items-center-safe p-5 border-b border-gray-800">
           <div className="flex items-center-safe gap-2">
             <ShoppingBag size={18} className="text-[#c8f400]" />
             <h1 className="font-semibold text-lg">Cart</h1>

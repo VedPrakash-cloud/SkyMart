@@ -2,11 +2,13 @@ import React from "react";
 import { Route, Routes } from "react-router";
 import Home from "../pages/Home";
 import Products from "../pages/Products";
+
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import About from "../pages/About";
 import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "./MainLayout";
+import ProductDetailCard from "../components/ProductDetailCard";
 
 const AppRoutes = () => {
   return (
@@ -29,6 +31,14 @@ const AppRoutes = () => {
             element={
               <ProtectedRoute>
                 <Products />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/products/:id"
+            element={
+              <ProtectedRoute>
+                <ProductDetailCard />
               </ProtectedRoute>
             }
           />

@@ -1,4 +1,4 @@
-import { Check, ShoppingCart } from "lucide-react";
+import { Check, Star, ShoppingCart } from "lucide-react";
 import {useContext} from 'react';
 import { MyLoginStore } from '../context/AppStore'
 
@@ -28,8 +28,8 @@ const ProductCard = ({ product }) => {
             <p className="text-2xl truncate md:text-base font-semibold">
               {product.title}
             </p>
-            <span className="text-xs truncate text-gray-200/30 font-semibold">
-              ({product.rating})
+            <span className="flex items-center-safe gap-1 text-xs truncate text-gray-200/30 font-semibold">
+              <Star size={14} fill="#facc15" className="text-amber-400"/>({product.rating})
             </span>
           </div>
         </div>

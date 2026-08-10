@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import Navbar from "../components/Navbar";
 import { MyLoginStore } from "../context/AppStore";
 import { MoveRight, Package, Shield, Star, Tag, TrendingUp, Zap } from "lucide-react";
-import Footer from "./Footer";
+
 import { useNavigate } from "react-router";
+import Footer from "../components/Footer";
+import Widgets from "../components/Widgets";
 
 const Home = () => {
   const now = new Date().getHours();
@@ -102,8 +104,9 @@ const Home = () => {
         </div>
       </div>
 
-      {/* footer-cards */}
+      <Widgets />
 
+      {/* footer-cards */}
       <div className="grid md:flex md:items-center-safe md:justify-evenly gap-5 my-10">
         <div className="flex gap-5 justify-self-start border w-full p-5 rounded-2xl">
           <Zap className="text-[#c8f400]"/>
@@ -127,10 +130,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-
       </div>
       {/* footer area */}
-
       <Footer />
     </div>
   );

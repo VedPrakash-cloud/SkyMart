@@ -1,7 +1,8 @@
 import { ArrowRight, HeartHandshake, Package, ShieldCheck, Star, Truck, UsersRound, Zap } from 'lucide-react'
 import React from 'react';
-import Footer from './Footer'
+
 import { useNavigate } from 'react-router';
+import Footer from '../components/Footer';
 
 const About = () => {
   const navigate = useNavigate();

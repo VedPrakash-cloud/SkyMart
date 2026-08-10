@@ -44,9 +44,12 @@ const Navbar = () => {
         <div className={`md:hidde bg-black/80 h-screen fixed top-0 right-0 ${showMenu ? "translate-x-0" : "translate-x-full"} p-5 w-[60%] transition-transform duration-500 ease-in-out`}>
           <p onClick={()=>setShowMenu(false)} className="text-right cursor-pointer font-bold text-xl">X</p>
           <div className="relative top-10 grid md:flex gap-4 font-semibold">
-          <NavLink to={"/"} className={({isActive})=> isActive ? "text-[#c8f400]"  : "text-gray-400"}>Home</NavLink>
-          <NavLink to={"/products"} className={({isActive})=> isActive ? "text-[#c8f400]" : "text-gray-400"}onClick={fetchApi}>Shop</NavLink>
-          <NavLink to={"/about"} className={({isActive})=> isActive ? "text-[#c8f400]" : "text-gray-400"}>About</NavLink>
+          <NavLink to={"/"} className={({isActive})=> isActive ? "text-[#c8f400]"  : "text-gray-400"} onClick={()=>setShowMenu(false)}>Home</NavLink>
+          <NavLink to={"/products"} className={({isActive})=> isActive ? "text-[#c8f400]" : "text-gray-400"}onClick={()=>{
+            fetchApi();
+            setShowMenu(false);
+          }}>Shop</NavLink>
+          <NavLink to={"/about"} className={({isActive})=> isActive ? "text-[#c8f400]" : "text-gray-400"} onClick={()=>setShowMenu(false)}>About</NavLink>
           <p onClick={()=>{setShowProfile(true)
             setShowMenu(false)}} className="text-gray-400">Profile</p>
         </div>
@@ -98,6 +101,7 @@ const Navbar = () => {
           className="flex gap-2 cursor-pointer items-center-safe border border-gray-200/50 rounded-xl p-2 text-white">
             <ShoppingCart size={18}/>
             Cart
+            {cartItem.length > 0 ? <sup className="px-1 py-1 bg-red-600 rounded-full text-xs/2 animate-pulse">{cartItem.length}</sup> : ""}
           </span>
           <span
             className="cursor-pointer active:scale-95 flex gap-2 items-center-safe border border-gray-200/50 rounded-xl p-2 text-white hover:bg-red-600/50 hover:border-red-500 transition-colors"

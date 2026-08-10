@@ -99,7 +99,6 @@ export const ContextProvider = ({ children }) => {
   const grandTotal = cartItem.reduce((acc,item)=>acc+ item.price * item.quantity, 0).toFixed(2);
 
 
-
   const filteredList = data
 
     .filter((item) => {
@@ -166,7 +165,8 @@ export const ContextProvider = ({ children }) => {
         clearCart,
         grandTotal,
         categoryList,
-        handleCheckout
+        handleCheckout,
+        
       }}
     >
       {children}
